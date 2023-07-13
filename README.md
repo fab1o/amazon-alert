@@ -4,7 +4,7 @@ Amazon price drop alert application.
 
 When a price of a product at Amazon has reached your price, a Chrome window will open at Amazon.com for you to buy the product.
 
-For MacOS.
+For MacOS Terminals (it runs via command-line).
 
 ```sh
 -------------------------------------------------------------------
