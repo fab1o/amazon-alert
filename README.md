@@ -1,6 +1,6 @@
 # @fabio/amazon-alert
 
-Amazon price drop alert application.
+Amazon price drop alert application. When a price of a product at Amazon has reached your price, a Chrome window will open at Amazon.com for you to buy the product.
 
 ```sh
 -------------------------------------------------------------------
@@ -13,9 +13,13 @@ Amazon price drop alert application.
 
 ## Requirements
 
+1. Chrome
+2. Node
+
 This app runs on Node. To install node, go to [https://nodejs.org/en](https://nodejs.org/en) download and install version LTS.
 
 Make sure node is installed by running on Terminal:
+
 ```sh
 node --version
 ```
@@ -61,6 +65,7 @@ amazon-alert --url https://www.amazon.com/dp/B0812JPZFT
 ```sh
 amazon-alert --url https://www.amazon.com/dp/B0812JPZFT --frequency Daily
 ```
+
 ### Help
 
 ```sh

@@ -1,7 +1,12 @@
 import { console, shell } from '@fab1o/node-utility';
 
 import { Amazon } from './amazon.js';
-import { priceFormat, countdownTimer, wait } from './utils/index.js';
+import {
+    priceFormat,
+    countdownTimer,
+    wait,
+    printCongrats,
+} from './utils/index.js';
 import { askForPrice } from './prompt/askForPrice.js';
 
 export class Engine {
@@ -70,11 +75,14 @@ export class Engine {
             if (product.isSoldOut) {
                 console.log.red('Sold out at the moment');
             } else {
+                console.log.cyan('Currently sold by', product.soldBy);
+                console.log.cyan('Current price at $', product.priceValue);
+
                 if (this.hasPriceChanged(product)) {
-                    console.log.red('Price change!');
+                    console.log.red('Price has changed!');
+                } else if (this.currentPrice) {
+                    console.log.cyan('Price has not changed');
                 }
-                console.log.cyan('Sold by', product.soldBy);
-                console.log.cyan('Price $', product.priceValue);
 
                 this.currentPrice = product.priceValue;
             }
@@ -88,10 +96,13 @@ export class Engine {
             }
 
             if (this.hasPriceMatched(product)) {
-                // price math
+                // price has matched
+                printCongrats();
+
                 console.log.green(
                     'Congrats! Your price has been reached. Go buy it now!'
                 );
+                console.line.green(60);
 
                 shell.execSync(`open -a "Google Chrome" ${url}`);
             } else {
