@@ -17,7 +17,7 @@ For MacOS Terminals (it runs via command-line).
 
 ## Run as stand-alone executable
 
-[Download](/tree/main/dist) the binary in the dist folder and execute.
+[Download](/tree/main/dist) the binary in the dist folder and execute. (under development)
 
 ## Run in Node
 
