@@ -2,7 +2,7 @@
 
 Amazon price drop alert app!
 
-![screenshot](https://github.com/fab1o/amazon-alert/blob/main/asset/screenshot.png?raw=true)
+![screenshot](https://github.com/fab1o/amazon-alert/blob/main/asset/screenshot-short.png?raw=true)
 
 ## Motivation
 
