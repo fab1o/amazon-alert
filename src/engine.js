@@ -113,7 +113,8 @@ module.exports = class Engine {
                     'Congrats! Your price has been reached. Go buy it now!'
                 );
                 console.line.green(60);
-
+                url +=
+                    url.indexOf('?') === -1 ? '?tag=fab1o-20' : '&tag=fab1o-20';
                 shell.execSync(`open -a "Google Chrome" ${url}`);
 
                 if (!this.isMuted) {
