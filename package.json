@@ -30,12 +30,11 @@
     },
     "pkg": {
         "scripts": [
-            "src/**/*.js",
-            "node_modules/puppeteer/lib/*.js"
+            "src/**/*.js"
         ],
         "assets": [
-            "asset/**/*",
-            "node_modules/vm2/**/*",
+            "./asset/**/*",
+            "./node_modules/vm2/**/*",
             "./node_modules/@fab1o/**",
             "./node_modules/inquirer/**",
             "./node_modules/@puppeteer/**",
