@@ -1,6 +1,10 @@
 # @fabio/amazon-alert
 
-Amazon price drop alert application. When a price of a product at Amazon has reached your price, a Chrome window will open at Amazon.com for you to buy the product.
+Amazon price drop alert application.
+
+When a price of a product at Amazon has reached your price, a Chrome window will open at Amazon.com for you to buy the product.
+
+For MacOS.
 
 ```sh
 -------------------------------------------------------------------
@@ -24,16 +28,18 @@ Make sure node is installed by running on Terminal:
 node --version
 ```
 
-Then run on Terminal:
+Then install this app on Terminal:
 
 ```sh
 sudo npm install --global @fab1o/amazon-alert
 ```
 
+Type your computer login password to allow the application to be installed.
+
 ## Usage
 
 ```sh
-amazon-alert [-u product_url] [-f frequency] [-p price]
+amazon-alert [-u product_url] [-f frequency] [-p price] [--mute]
 ```
 
 Where:
@@ -41,6 +47,7 @@ Where:
 -   **-u, --url** Product url, i.e: https://www.amazon.com/dp/B0812JPZFT
 -   **-f, --frequency** Frequency to run price checker, options are: Daily, Hourly, Half-Hourly
 -   **-p, --price** Price you want to be alerted
+-   **-m, --mute** No audio alert
 
 ## Examples
 

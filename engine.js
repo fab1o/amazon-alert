@@ -10,11 +10,15 @@ import {
 import { askForPrice } from './prompt/askForPrice.js';
 
 export class Engine {
-    currentPrice = 0;
-    priceAlert = 0;
+    constructor(isMuted) {
+        this.currentPrice = 0;
+        this.priceAlert = 0;
 
-    tries = 0; // in case of error
-    maxTries = 3;
+        this.tries = 0; // in case of error
+        this.maxTries = 3;
+
+        this.isMuted = isMuted;
+    }
 
     /**
      * @desc Asks user for price alert.
@@ -105,6 +109,20 @@ export class Engine {
                 console.line.green(60);
 
                 shell.execSync(`open -a "Google Chrome" ${url}`);
+
+                if (!this.isMuted) {
+                    try {
+                        const path = shell.execSync(
+                            'npm ls -g --depth 0 @fab1o/amazon-alert | head -n 1'
+                        );
+
+                        shell.execSync(
+                            `afplay ${path}/node_modules/@fab1o/amazon-alert/alert.mp3`
+                        );
+                    } catch (ex) {
+                        console.error(ex);
+                    }
+                }
             } else {
                 await wait(1);
                 countdownTimer(frequency);

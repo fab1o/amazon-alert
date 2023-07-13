@@ -1,6 +1,6 @@
 {
     "name": "@fab1o/amazon-alert",
-    "version": "0.0.2",
+    "version": "0.0.8",
     "description": "A price alert for an Amazon product.",
     "main": "index.js",
     "author": {
@@ -15,7 +15,7 @@
     "license": "MIT",
     "type": "module",
     "dependencies": {
-        "@fab1o/node-utility": "1.6.0",
+        "@fab1o/node-utility": "1.6.1",
         "inquirer": "9.2.7",
         "puppeteer": "20.8.1",
         "puppeteer-extra": "3.3.6",

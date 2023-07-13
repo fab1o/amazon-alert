@@ -12,7 +12,7 @@ import {
     frequencyOptions,
 } from './prompt/all.js';
 
-const VERSION = '1.0.0';
+const VERSION = '0.0.8';
 
 /**
  * @desc main function
@@ -36,6 +36,12 @@ async function main() {
             alias: 'price',
             description: 'Price (must be lower than the price found at Amazon)',
             type: 'number',
+        })
+        .option('m', {
+            alias: 'mute',
+            description: 'Mute, play no audio alert',
+            type: 'boolean',
+            default: false,
         })
         .version(VERSION)
         .strict()
@@ -68,15 +74,13 @@ async function main() {
 
         print(url, frequency, priceAlert);
 
-        const engine = new Engine();
+        const engine = new Engine(argv.mute);
 
         engine.priceAlert = priceAlert;
 
         await engine.processProduct(url, frequency, priceAlert);
     } catch (ex) {
-        console.error(
-            `Could not retrieve product. Try running the script again.\n${ex.message}`
-        );
+        console.error(ex);
     }
 }
 
