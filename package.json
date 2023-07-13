@@ -1,6 +1,6 @@
 {
     "name": "@fab1o/amazon-alert",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A price alert for an Amazon product.",
     "main": "src/index.js",
     "author": {
@@ -9,6 +9,7 @@
     },
     "scripts": {
         "start": "node src/index.js",
+        "start-test": "node src/index.js -u https://www.amazon.com/dp/B09KS66VN7 -p 10 -f Daily",
         "pkg": "pkg .",
         "optx": "node index.js -p https://www.amazon.com/dp/B0812JPZFT",
         "arx": "node index.js -p https://www.amazon.com/dp/B09KS66VN7"
@@ -18,7 +19,8 @@
     "dependencies": {
         "@fab1o/node-utility": "1.6.1",
         "inquirer": "^8.0.0",
-        "puppeteer": "20.8.1",
+        "puppeteer": "19.11.1",
+        "puppeteer-core": "19.11.1",
         "puppeteer-extra": "3.3.6",
         "puppeteer-extra-plugin-stealth": "2.11.2",
         "yargs": "17.7.2"
@@ -27,7 +29,10 @@
         "amazon-alert": "src/index.js"
     },
     "pkg": {
-        "scripts": "src/**/*.js",
+        "scripts": [
+            "src/**/*.js",
+            "node_modules/puppeteer/lib/*.js"
+        ],
         "assets": [
             "asset/**/*",
             "node_modules/vm2/**/*",

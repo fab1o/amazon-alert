@@ -13,14 +13,19 @@ const askForPrice = require('./prompt/askForPrice.js');
 const Amazon = require('./amazon.js');
 
 module.exports = class Engine {
-    constructor(isMuted) {
-        this.currentPrice = 0;
-        this.priceAlert = 0;
+    constructor(isMuted, priceAlert) {
+        this.amazon = new Amazon();
 
         this.tries = 0; // in case of error
         this.maxTries = 3;
 
+        this.currentPrice = 0;
+        this.priceAlert = priceAlert;
         this.isMuted = isMuted;
+    }
+
+    async init() {
+        this.amazon.init();
     }
 
     /**
@@ -67,14 +72,12 @@ module.exports = class Engine {
      * @param {Number} frequency - User's frequency in milliseconds.
      */
     async processProduct(url, frequency) {
-        const amazon = new Amazon();
-
         console.line();
         console.log('Checking Amazon...');
         console.log('Please wait... press ⌘+. to abort or ⌘+w to close');
 
         try {
-            const product = await amazon.getProduct(url);
+            const product = await this.amazon.getProduct(url);
 
             console.line.green();
             console.log.green(product.title);

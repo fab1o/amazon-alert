@@ -1,12 +1,35 @@
+const path = require('path');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
-const { executablePath } = require('puppeteer');
+const {
+    PUPPETEER_REVISIONS,
+} = require('puppeteer-core/lib/cjs/puppeteer/revisions.js');
 
 puppeteer.use(StealthPlugin());
 
 module.exports = class Browser {
-    browser = null;
+    constructor() {
+        this.browser = null;
+    }
+
+    async init() {
+        const installedBrowser = await this.download();
+
+        this.executablePath = installedBrowser.executablePath;
+    }
+
+    async download() {
+        const cacheDir = path.join(path.resolve(__dirname, '../'), '.cache');
+
+        const browserFetcher = puppeteer.createBrowserFetcher({
+            path: cacheDir,
+        });
+
+        return await browserFetcher.download(
+            PUPPETEER_REVISIONS.chromium
+        );
+    }
 
     async getPage() {
         this.browser = await puppeteer.launch({
@@ -17,7 +40,7 @@ module.exports = class Browser {
                 '--window-size=1600,900',
                 '--single-process',
             ],
-            executablePath: executablePath(),
+            executablePath: this.executablePath,
         });
 
         const page = await this.browser.newPage();
@@ -33,8 +56,7 @@ module.exports = class Browser {
         return page;
     }
 
-    async dispose() {
+    async close() {
         await this.browser.close();
-        this.browser = null;
     }
 };

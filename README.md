@@ -15,7 +15,13 @@ For MacOS Terminals (it runs via command-line).
 -------------------------------------------------------------------
 ```
 
-## Requirements
+## Run as stand-alone executable
+
+[Download](/tree/main/dist) the binary in the dist folder and execute.
+
+## Run in Node
+
+### Requirements
 
 1. Chrome
 2. Node
@@ -42,9 +48,7 @@ Now, run the app:
 amazon-alert
 ```
 
----
-
-## Usage
+### Usage
 
 ```sh
 amazon-alert [-u product_url] [-f frequency] [-p price] [--mute]

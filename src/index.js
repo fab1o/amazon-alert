@@ -75,9 +75,9 @@ async function main() {
 
         print(url, frequency, priceAlert);
 
-        const engine = new Engine(argv.mute);
+        const engine = new Engine(argv.mute, priceAlert);
 
-        engine.priceAlert = priceAlert;
+        await engine.init();
 
         await engine.processProduct(url, frequency, priceAlert);
     } catch (ex) {

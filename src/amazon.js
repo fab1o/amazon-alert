@@ -4,10 +4,16 @@ const Product = require('./product.js');
 const wait = require('./utils/wait.js');
 
 module.exports = class Amazon {
-    async getProduct(url) {
-        const browser = new Browser();
+    constructor() {
+        this.browser = new Browser();
+    }
 
-        const page = await browser.getPage();
+    async init() {
+        await this.browser.init();
+    }
+
+    async getProduct(url) {
+        const page = await this.browser.getPage();
 
         await page.goto(url);
 
@@ -21,7 +27,7 @@ module.exports = class Amazon {
         product.price = await this.getPrice(page);
         product.soldBy = await this.getSoldBy(page);
 
-        await browser.dispose();
+        await this.browser.close();
 
         return product;
     }
