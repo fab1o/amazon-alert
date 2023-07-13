@@ -13,7 +13,7 @@ const {
 
 const Engine = require('./engine.js');
 
-const VERSION = '1.0.3';
+const VERSION = '1.0.5';
 
 /**
  * @desc main function
