@@ -127,7 +127,7 @@ module.exports = class Engine {
                 setTimeout(async () => {
                     await wait(1);
                     await this.processProduct(url, frequency);
-                }, frequency);
+                }, frequency * 1000);
             }
             //end of process
         } catch (ex) {
