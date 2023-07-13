@@ -31,6 +31,8 @@ module.exports = class Browser {
             height: 720,
         });
 
+        await page.setCacheEnabled(false);
+
         page.setDefaultNavigationTimeout(10 * 1000);
         page.setDefaultTimeout(10 * 1000);
 
