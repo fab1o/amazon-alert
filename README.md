@@ -41,6 +41,7 @@ Now, run the app:
 ```sh
 amazon-alert
 ```
+
 ---
 
 ## Usage
@@ -64,7 +65,7 @@ Where:
 amazon-alert
 ```
 
-The application will ask you to select a product from the default products list available.
+The application will ask you to select a product = require(the default products list available.
 
 ### Running the application with a product url
 
@@ -81,6 +82,7 @@ amazon-alert --url https://www.amazon.com/dp/B0812JPZFT --frequency Daily
 ```
 
 ---
+
 ### Help
 
 ```sh
