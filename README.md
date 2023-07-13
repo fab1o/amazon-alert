@@ -36,6 +36,13 @@ sudo npm install --global @fab1o/amazon-alert
 
 Type your computer login password to allow the application to be installed.
 
+Now, run the app:
+
+```sh
+amazon-alert
+```
+---
+
 ## Usage
 
 ```sh
@@ -73,6 +80,7 @@ amazon-alert --url https://www.amazon.com/dp/B0812JPZFT
 amazon-alert --url https://www.amazon.com/dp/B0812JPZFT --frequency Daily
 ```
 
+---
 ### Help
 
 ```sh
