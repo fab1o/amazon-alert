@@ -4,6 +4,9 @@
 module.exports = class Product {
     constructor(url) {
         this.url = url;
+        this.priceText = null;
+        this.priceValue = null;
+        this.soldBy = null;
     }
 
     /**
@@ -22,6 +25,6 @@ module.exports = class Product {
     }
 
     get isSoldOut() {
-        return !this.priceValue;
+        return !this.priceValue || this.soldBy == null;
     }
 };
