@@ -1,6 +1,6 @@
 {
     "name": "@fab1o/amazon-alert",
-    "version": "1.0.7",
+    "version": "1.10.0",
     "description": "A price alert for an Amazon product.",
     "main": "src/index.js",
     "author": {
@@ -9,6 +9,7 @@
     },
     "scripts": {
         "start": "node src/index.js",
+        "version": "echo 'module.exports = \"'$npm_package_version'\"' > src/version.js",
         "start-test": "node src/index.js -u https://www.amazon.com/dp/B09KS66VN7 -p 10 -f Daily",
         "pkg": "pkg .",
         "optx": "node index.js -p https://www.amazon.com/dp/B0812JPZFT",
