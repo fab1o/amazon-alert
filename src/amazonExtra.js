@@ -20,9 +20,9 @@ module.exports = class AmazonExtra {
 
     async getBuyingOptions(page) {
         //buying options
-        const buyingOptionsButton = await page.$(
-            '#olpLinkWidget_feature_div .a-touch-link'
-        );
+        const buyingOptionsButton =
+            (await page.$('#olpLinkWidget_feature_div .a-touch-link')) ||
+            (await page.$('#buybox-see-all-buying-choices .a-button-text'));
 
         if (buyingOptionsButton) {
             await buyingOptionsButton.click();
