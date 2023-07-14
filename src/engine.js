@@ -83,7 +83,7 @@ module.exports = class Engine {
             console.log.green(product.title);
 
             if (product.isSoldOut) {
-                console.log.red('Sold out at the moment');
+                console.log.red('SOLD OUT');
             } else {
                 console.log.cyan('Currently sold by', product.soldBy);
                 console.log.cyan('Current price at $', product.priceValue);
@@ -95,40 +95,45 @@ module.exports = class Engine {
                 }
 
                 this.currentPrice = product.priceValue;
-            }
 
-            if (await this.askForPriceAlert()) {
-                console.line();
-                console.log.yellow(
-                    'Price drop set to',
-                    priceFormat(this.priceAlert)
-                );
-            }
-
-            if (this.hasPriceMatched(product)) {
-                // price has matched
-                printCongrats();
-
-                console.log.green(
-                    'Congrats! Your price has been reached. Go buy it now!'
-                );
-                console.line.green(60);
-                url +=
-                    url.indexOf('?') === -1 ? '?tag=fab1o-20' : '&tag=fab1o-20';
-                shell.execSync(`open -a "Google Chrome" ${url}`);
-
-                if (!this.isMuted) {
-                    playAlertAudio();
+                if (await this.askForPriceAlert()) {
+                    console.line();
+                    console.log.yellow(
+                        'Price drop set to',
+                        priceFormat(this.priceAlert)
+                    );
                 }
-            } else {
-                await wait(1);
-                countdownTimer(frequency);
 
-                setTimeout(async () => {
-                    await wait(1);
-                    await this.processProduct(url, frequency);
-                }, frequency * 1000);
+                if (this.hasPriceMatched(product)) {
+                    // price has matched
+                    printCongrats();
+
+                    console.log.green(
+                        'Congrats! Your price has been reached. Go buy it now!'
+                    );
+                    console.line.green(60);
+                    url +=
+                        url.indexOf('?') === -1
+                            ? '?tag=fab1o-20'
+                            : '&tag=fab1o-20';
+                    shell.execSync(`open -a "Google Chrome" ${url}`);
+
+                    if (!this.isMuted) {
+                        playAlertAudio();
+                    }
+
+                    return;
+                }
             }
+
+            await wait(1);
+            countdownTimer(frequency);
+
+            setTimeout(async () => {
+                await wait(1);
+                await this.processProduct(url, frequency);
+            }, frequency * 1000);
+
             //end of process
         } catch (ex) {
             console.line.red();
