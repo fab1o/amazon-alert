@@ -3,7 +3,7 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const { console } = require('@fab1o/node-utility');
 
-const { print, printLogo } = require('./utils/index.js');
+const { print, printLogo, printVersionCheck } = require('./utils/index.js');
 const {
     askForFrequency,
     askForProduct,
@@ -12,8 +12,7 @@ const {
 } = require('./prompt/all.js');
 
 const Engine = require('./engine.js');
-
-const VERSION = '1.0.5';
+const Version = require('./version.js');
 
 /**
  * @desc main function
@@ -44,11 +43,13 @@ async function main() {
             type: 'boolean',
             default: false,
         })
-        .version(VERSION)
+        .version(Version)
         .strict()
         .parse();
 
     try {
+        printVersionCheck();
+
         let url;
 
         if (argv.url) {
