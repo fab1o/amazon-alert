@@ -1,6 +1,6 @@
 {
     "name": "@fab1o/amazon-alert",
-    "version": "1.13.0",
+    "version": "1.14.0",
     "description": "A price alert for an Amazon product.",
     "main": "src/index.js",
     "author": {
