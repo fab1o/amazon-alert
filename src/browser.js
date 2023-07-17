@@ -5,7 +5,7 @@ const { executablePath } = require('puppeteer');
 
 puppeteer.use(StealthPlugin());
 
-module.exports = class Browser {
+class Browser {
     constructor() {
         this.browser = null;
     }
@@ -42,4 +42,6 @@ module.exports = class Browser {
     async close() {
         await this.browser.close();
     }
-};
+}
+
+module.exports = Browser;

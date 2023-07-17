@@ -1,6 +1,6 @@
 {
     "name": "@fab1o/amazon-alert",
-    "version": "1.10.0",
+    "version": "1.13.0",
     "description": "A price alert for an Amazon product.",
     "main": "src/index.js",
     "author": {
@@ -10,10 +10,8 @@
     "scripts": {
         "start": "node src/index.js",
         "version": "echo 'module.exports = \"'$npm_package_version'\"' > src/version.js",
-        "start-test": "node src/index.js -u https://www.amazon.com/dp/B09KS66VN7 -p 10 -f Daily",
-        "pkg": "pkg .",
-        "optx": "node index.js -p https://www.amazon.com/dp/B0812JPZFT",
-        "arx": "node index.js -p https://www.amazon.com/dp/B09KS66VN7"
+        "start-test": "node src/index.js -u https://www.amazon.com/dp/B0812JPZFT -p 40 -f Half-Hourly",
+        "pkg": "pkg ."
     },
     "license": "MIT",
     "type": "commonjs",
@@ -49,6 +47,6 @@
         "outputPath": "dist"
     },
     "devDependencies": {
-        "pkg": "^5.8.1"
+        "pkg": "5.8.1"
     }
 }

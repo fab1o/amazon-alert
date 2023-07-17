@@ -2,17 +2,16 @@ const { console, shell } = require('@fab1o/node-utility');
 
 const {
     priceFormat,
-    countdownTimer,
     wait,
     printCongrats,
     playAlertAudio,
 } = require('./utils/index.js');
 
-const askForPrice = require('./prompt/askForPrice.js');
+const { askForPrice, frequencyOptions } = require('./prompt/index.js');
 
 const Amazon = require('./amazon.js');
 
-module.exports = class Engine {
+class Engine {
     constructor(isMuted, priceAlert) {
         this.amazon = new Amazon();
 
@@ -69,7 +68,7 @@ module.exports = class Engine {
     /**
      * @desc Process a product url.
      * @param {String} url - Product url.
-     * @param {Number} frequency - User's frequency in milliseconds.
+     * @param {Number} frequency - User's frequency option.
      */
     async processProduct(url, frequency) {
         console.line();
@@ -127,12 +126,9 @@ module.exports = class Engine {
             }
 
             await wait(1);
-            countdownTimer(frequency);
-
-            setTimeout(async () => {
-                await wait(1);
-                await this.processProduct(url, frequency);
-            }, frequency * 1000);
+            await this.countdownTimer(frequency);
+            await wait(1);
+            await this.processProduct(url, frequency);
 
             //end of process
         } catch (ex) {
@@ -151,4 +147,47 @@ module.exports = class Engine {
             }
         }
     }
-};
+
+    /**
+     * @desc Counts down the time on console
+     * @param {Number} frequency - Frequency option.
+     * @returns {Promise}
+     */
+    async countdownTimer(frequency) {
+        return new Promise((resolve) => {
+            let timer = frequency - 1;
+
+            const countdown = setInterval(() => {
+                const hours =
+                    timer >= frequencyOptions.Hourly - 1
+                        ? Math.floor(timer / 60 / 60)
+                        : 0;
+
+                const minutes =
+                    timer >= frequencyOptions.Hourly - 1
+                        ? Math.floor((timer % 3600) / 60)
+                        : Math.floor(timer / 60);
+
+                const seconds = Math.floor(timer % 60);
+
+                process.stdout.write(
+                    `-Scheduled to check again in ${
+                        hours < 10 ? '0' : ''
+                    }${hours}:${minutes < 10 ? '0' : ''}${minutes}:${
+                        seconds < 10 ? '0' : ''
+                    }${seconds}\r`
+                );
+
+                --timer;
+
+                if (timer < 0) {
+                    process.stdout.write('\r\x1b[K');
+                    clearInterval(countdown);
+                    resolve();
+                }
+            }, 1000);
+        });
+    }
+}
+
+module.exports = Engine;

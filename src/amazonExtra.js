@@ -1,6 +1,6 @@
 const { wait } = require('./utils/wait.js');
 
-module.exports = class AmazonExtra {
+class AmazonExtra {
     async movePageUp(page) {
         await page.keyboard.press('End');
 
@@ -96,3 +96,5 @@ module.exports = class AmazonExtra {
         }
     }
 };
+
+module.exports = AmazonExtra;

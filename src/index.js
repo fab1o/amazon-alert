@@ -9,7 +9,7 @@ const {
     askForProduct,
     askForPrice,
     frequencyOptions,
-} = require('./prompt/all.js');
+} = require('./prompt/index.js');
 
 const Engine = require('./engine.js');
 const Version = require('./version.js');

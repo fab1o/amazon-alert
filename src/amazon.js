@@ -3,7 +3,7 @@ const Product = require('./product.js');
 
 const wait = require('./utils/wait.js');
 
-module.exports = class Amazon {
+class Amazon {
     constructor() {
         this.browser = new Browser();
     }
@@ -56,3 +56,5 @@ module.exports = class Amazon {
         );
     }
 };
+
+module.exports = Amazon;

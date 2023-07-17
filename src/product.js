@@ -1,7 +1,7 @@
 /**
  * @desc Product
  */
-module.exports = class Product {
+class Product {
     constructor(url) {
         this.url = url;
         this.priceText = null;
@@ -27,4 +27,6 @@ module.exports = class Product {
     get isSoldOut() {
         return !this.priceValue || this.soldBy == null;
     }
-};
+}
+
+module.exports = Product;

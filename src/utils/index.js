@@ -1,4 +1,3 @@
-const countdownTimer = require('./countdownTimer.js');
 const priceFormat = require('./priceFormat.js');
 const print = require('./print.js');
 const printCongrats = require('./printCongrats.js');
@@ -8,7 +7,6 @@ const printVersionCheck = require('./printVersionCheck.js');
 const wait = require('./wait.js');
 
 module.exports = {
-    countdownTimer,
     priceFormat,
     print,
     printCongrats,
