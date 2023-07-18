@@ -12,8 +12,20 @@ const { askForPrice, frequencyOptions } = require('./prompt/index.js');
 const Amazon = require('./amazon.js');
 
 class Engine {
-    constructor(isMuted, priceAlert) {
+    /**
+     *
+     * @param {object} options
+     * @param {String} options.url - Product url.
+     * @param {Boolean} options.isMuted - Whether or not to play audio.
+     * @param {Number} options.frequency - User's frequency option.
+     * @param {Number} options.priceAlert - Price to be alerted.
+     */
+    constructor(options) {
+        const { url, frequency, isMuted, priceAlert } = options;
+
         this.amazon = new Amazon();
+        this.url = url;
+        this.frequency = frequency;
 
         this.tries = 0; // in case of error
         this.maxTries = 3;
@@ -65,18 +77,13 @@ class Engine {
         return product.priceValue && product.priceValue <= this.priceAlert;
     }
 
-    /**
-     * @desc Process a product url.
-     * @param {String} url - Product url.
-     * @param {Number} frequency - User's frequency option.
-     */
-    async processProduct(url, frequency) {
+    async processProduct() {
         console.line();
         console.log('Checking Amazon...');
         console.log('Please wait... press ⌘+. to abort or ⌘+w to close');
 
         try {
-            const product = await this.amazon.getProduct(url);
+            const product = await this.amazon.getProduct(this.url);
 
             console.line.green();
             console.log.green(product.title);
@@ -104,58 +111,65 @@ class Engine {
                 }
 
                 if (this.hasPriceMatched(product)) {
-                    // price has matched
-                    printCongrats();
-
-                    console.log.green(
-                        'Congrats! Your price has been reached. Go buy it now!'
-                    );
-                    console.line.green(60);
-                    url +=
-                        url.indexOf('?') === -1
-                            ? '?tag=fab1o-20'
-                            : '&tag=fab1o-20';
-                    shell.execSync(`open -a "Google Chrome" ${url}`);
-
-                    if (!this.isMuted) {
-                        playAlertAudio();
-                    }
-
+                    this.openProduct(this.url);
                     return;
                 }
             }
 
             await wait(1);
-            await this.countdownTimer(frequency);
+            await this.countdownTimer();
             await wait(1);
-            await this.processProduct(url, frequency);
+            await this.processProduct();
 
             //end of process
         } catch (ex) {
             console.line.red();
             console.error(`Could not retrieve product.\n${ex.message}`);
+            await this.retry();
+        } finally {
+            await this.amazon.closeBrowser();
+        }
+    }
 
-            if (this.tries < this.maxTries) {
-                console.error('Trying again...');
-                this.tries++;
-                await wait(this.tries);
-                await this.processProduct(url, frequency);
-            } else {
-                console.error(
-                    'Number of attempts maxed out. You are out of luck :('
-                );
-            }
+    async retry() {
+        if (this.tries < this.maxTries) {
+            console.error('Trying again...');
+            this.tries++;
+            await wait(this.tries + 10);
+            await this.processProduct();
+        } else {
+            console.error(
+                'Number of attempts maxed out. You are out of luck :('
+            );
+        }
+    }
+
+    /**
+     * @desc Opens browser and plays audio when price has reached
+     */
+    openProduct() {
+        printCongrats();
+
+        console.log.green(
+            'Congrats! Your price has been reached. Go buy it now!'
+        );
+        console.line.green(60);
+        this.url +=
+            this.url.indexOf('?') === -1 ? '?tag=fab1o-20' : '&tag=fab1o-20';
+        shell.execSync(`open -a "Google Chrome" ${this.url}`);
+
+        if (!this.isMuted) {
+            playAlertAudio();
         }
     }
 
     /**
      * @desc Counts down the time on console
-     * @param {Number} frequency - Frequency option.
      * @returns {Promise}
      */
-    async countdownTimer(frequency) {
+    async countdownTimer() {
         return new Promise((resolve) => {
-            let timer = frequency - 1;
+            let timer = this.frequency - 1;
 
             const countdown = setInterval(() => {
                 const hours =

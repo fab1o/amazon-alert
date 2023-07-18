@@ -27,9 +27,13 @@ class Amazon {
         product.price = await this.getPrice(page);
         product.soldBy = await this.getSoldBy(page);
 
-        await this.browser.close();
+        await this.closeBrowser();
 
         return product;
+    }
+
+    async closeBrowser() {
+        await this.browser.close();
     }
 
     async getTitle(page) {
@@ -55,6 +59,6 @@ class Amazon {
                 ?.textContent.trim()
         );
     }
-};
+}
 
 module.exports = Amazon;

@@ -76,7 +76,14 @@ async function main() {
 
         print(url, frequency, priceAlert);
 
-        const engine = new Engine(argv.mute, priceAlert);
+        const { mute } = argv;
+
+        const engine = new Engine({
+            url,
+            frequency,
+            mute,
+            priceAlert,
+        });
 
         await engine.init();
 
