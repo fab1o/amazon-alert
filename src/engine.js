@@ -44,21 +44,11 @@ class Engine {
      * @returns {Boolean} - Whether or not changed price alert.
      */
     async askForPriceAlert() {
-        if (
-            !this.priceAlert ||
-            this.priceAlert > this.currentPrice ||
-            this.priceAlert <= 2
-        ) {
+        if (!this.priceAlert || this.priceAlert <= 2) {
             this.priceAlert = Number(await askForPrice());
 
             if (this.priceAlert <= 2) {
                 console.warn('Your price is too low!');
-                this.priceAlert = 0;
-                await this.askForPriceAlert();
-            } else if (this.priceAlert > this.currentPrice) {
-                console.warn(
-                    'Your price must be lower than the current price!'
-                );
                 this.priceAlert = 0;
                 await this.askForPriceAlert();
             }
