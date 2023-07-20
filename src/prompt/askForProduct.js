@@ -5,7 +5,7 @@ const inquirer = require('inquirer');
  */
 module.exports = async function askForProduct() {
     const promptOptions = {
-        'Wilson AVP ARX': 'https://www.amazon.com/dp/B09KS66VN7',
+        'Wilson AVP GRX': 'https://www.amazon.com/dp/B0BRQVCX9F',
         'Wilson AVP OPTX': 'https://www.amazon.com/dp/B0812JPZFT',
     };
 
