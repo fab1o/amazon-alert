@@ -1,4 +1,5 @@
-const { console, shell } = require('@fab1o/node-utility');
+const open = require('open');
+const { console } = require('@fab1o/node-utility');
 
 const {
     priceFormat,
@@ -146,7 +147,8 @@ class Engine {
         console.line.green(60);
         this.url +=
             this.url.indexOf('?') === -1 ? '?tag=fab1o-20' : '&tag=fab1o-20';
-        shell.execSync(`open -a "Google Chrome" ${this.url}`);
+        
+        open(this.url);
 
         if (!this.isMuted) {
             playAlertAudio();
