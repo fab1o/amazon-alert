@@ -145,8 +145,6 @@ class Engine {
             'Congrats! Your price has been reached. Go buy it now!'
         );
         console.line.green(60);
-        this.url +=
-            this.url.indexOf('?') === -1 ? '?tag=fab1o-20' : '&tag=fab1o-20';
         
         open(this.url);
 
