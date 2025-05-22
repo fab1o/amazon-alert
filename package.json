@@ -1,20 +1,11 @@
 {
-    "name": "@fab1o/amazon-alert",
-    "version": "1.19.0",
-    "description": "A price alert for an Amazon product.",
-    "main": "src/index.js",
     "author": {
         "name": "Fabio Costa",
         "url": "https://github.com/fab1o"
     },
-    "scripts": {
-        "start": "node src/index.js",
-        "version": "echo 'module.exports = \"'$npm_package_version'\"' > src/version.js",
-        "start-test": "node src/index.js -u https://www.amazon.com/dp/B0812JPZFT -p 40 -f Half-Hourly",
-        "pkg": "pkg ."
+    "bin": {
+        "amazon-alert": "src/index.js"
     },
-    "license": "MIT",
-    "type": "commonjs",
     "dependencies": {
         "@fab1o/node-utility": "2.4.2",
         "inquirer": "^8.0.0",
@@ -25,29 +16,39 @@
         "puppeteer-extra-plugin-stealth": "2.11.2",
         "yargs": "17.7.2"
     },
-    "bin": {
-        "amazon-alert": "src/index.js"
-    },
-    "pkg": {
-        "scripts": [
-            "src/**/*.js"
-        ],
-        "assets": [
-            "./asset/**/*",
-            "./node_modules/vm2/**/*",
-            "./node_modules/@fab1o/**",
-            "./node_modules/inquirer/**",
-            "./node_modules/@puppeteer/**",
-            "./node_modules/puppeteer/**",
-            "./node_modules/puppeteer-extra/**",
-            "./node_modules/puppeteer-extra-plugin/**",
-            "./node_modules/puppeteer-extra-plugin-stealth/**",
-            "./node_modules/@babel/**",
-            "./node_modules/yargs/**"
-        ],
-        "outputPath": "dist"
-    },
+    "description": "A price alert for an Amazon product.",
     "devDependencies": {
         "pkg": "5.8.1"
-    }
+    },
+    "license": "MIT",
+    "main": "src/index.js",
+    "name": "@fab1o/amazon-alert",
+    "packageManager": "npm@8.19.2",
+    "pkg": {
+        "assets": [
+            "./asset/**/*",
+            "./node_modules/@babel/**",
+            "./node_modules/@fab1o/**",
+            "./node_modules/@puppeteer/**",
+            "./node_modules/inquirer/**",
+            "./node_modules/puppeteer-extra-plugin-stealth/**",
+            "./node_modules/puppeteer-extra-plugin/**",
+            "./node_modules/puppeteer-extra/**",
+            "./node_modules/puppeteer/**",
+            "./node_modules/vm2/**/*",
+            "./node_modules/yargs/**"
+        ],
+        "outputPath": "dist",
+        "scripts": [
+            "src/**/*.js"
+        ]
+    },
+    "scripts": {
+        "pkg": "pkg .",
+        "start": "node src/index.js",
+        "start-test": "node src/index.js -u https://www.amazon.com/dp/B0812JPZFT -p 40 -f Half-Hourly",
+        "version": "echo 'module.exports = \"'$npm_package_version'\"' > src/version.js"
+    },
+    "type": "commonjs",
+    "version": "1.19.0"
 }
