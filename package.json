@@ -50,5 +50,5 @@
         "version": "echo 'module.exports = \"'$npm_package_version'\"' > src/version.js"
     },
     "type": "commonjs",
-    "version": "1.19.1"
+    "version": "1.19.2"
 }
